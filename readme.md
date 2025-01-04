@@ -1,7 +1,14 @@
-Must use a pointer to a string so we can change the size at runtime.
+# Re-writing c++ STL from scratch
 
-Keep track of size and capacity yourself.
+Learn cmake.
 
-Add unit tests and make a general stl library.$$
+### std::vector
 
-https://stackoverflow.com/questions/3167272/how-does-c-stdvector-work
+- https://stackoverflow.com/questions/3167272/how-does-c-stdvector-work
+
+- Must use a pointer to a c-style array so we can change the size at runtime.
+
+- Keep track of size and capacity yourself.
+
+- Add unit tests.
+

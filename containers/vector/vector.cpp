@@ -7,17 +7,9 @@ namespace engineswap
 		size = 0;
 		capacity = 0;
 		
-		data = new T[0];
-		// data = std::make_unique<T[]>(0);
+		data = std::make_unique<T[]>(0);
 	}
-
-	// Free the memory used by data
-	template<typename T>
-	vector<T>::~vector(){
-		delete[] data; // frees all memory used by our data
-		data = nullptr; // to avoid dangling pointer
-	}
-
+	
 	template<typename T>
 	int vector<T>::getCapacity(){
 		return capacity;
@@ -30,18 +22,16 @@ namespace engineswap
 
 	template<typename T>
 	void vector<T>::resize(int newSize){
-		// Create new vector
-		T* newArrayPtr = new T[newSize];
+		// Create new array
+		std::unique_ptr<T[]> newArrayPtr = std::make_unique<T[]>(newSize);
 
-		//Copy old data over to new vector
+		// Copy old data over to new vector
 		for (int i=0; i < this->getSize(); i++){
 			newArrayPtr[i] = data[i];
 		}
 
-		// destroy old array
-		delete[] data;
-
-		data = newArrayPtr;
+		// Move new pointer to old pointer
+		data = std::move(newArrayPtr);
 
 		capacity = newSize;
 	}

@@ -11,7 +11,6 @@ namespace engineswap
 	class vector{
 	public:
 		vector();
-		~vector();
 
 		// capacity management
 		int getSize();
@@ -35,7 +34,6 @@ namespace engineswap
 		int size;
 		int capacity;
 
-		// T* data;
 		std::unique_ptr<T[]> data; 
 	};
 }
