@@ -1,16 +1,22 @@
 CC = g++
-CFLAGS = -std=c++14
+CFLAGS = -std=c++17
 
 # Default target
-all: vector
+all: vector hashmap
 
-# Compile main.cpp with vector.cpp
+# Vector build
 vector: main.cpp containers/vector/vector.cpp
 	$(CC) $(CFLAGS) main.cpp containers/vector/vector.cpp -o vector.out
 
-# Compile main.cpp with vector.cpp
 vector_test: tests/test_vector.cpp containers/vector/vector.cpp
 	$(CC) $(CFLAGS) tests/test_vector.cpp containers/vector/vector.cpp -o vector_test.out
+
+# Hashmap build
+hashmap: main.cpp containers/hashmap/hashmap.cpp
+	$(CC) $(CFLAGS) main.cpp containers/hashmap/hashmap.cpp -o hashmap.out
+
+hashmap_test: tests/test_hashmap.cpp containers/hashmap/hashmap.cpp
+	$(CC) $(CFLAGS) tests/test_hashmap.cpp containers/hashmap/hashmap.cpp -o hashmap_test.out
 
 # Clean all outputs
 clean:

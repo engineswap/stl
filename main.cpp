@@ -1,35 +1,14 @@
 #include <iostream>
-#include "./containers/vector/vector.hpp"
+// #include "./containers/vector/vector.hpp"
+#include "./containers/hashmap/hashmap.hpp"
 using std::cout;
 
 int main(){
-	engineswap::vector<int> v; // stack allocated v
-	v.pushBack(1);
-	cout << v.toString();
+	engineswap::unordered_map<std::string> h;
 
-	v.pushBack(1);
-	cout << v.toString();
+	h.insert("C++", "Based");
+	h.insert("Python", "Goated");
+	h.insert("Php", "Its there");
 
-	v.pushBack(1);
-	cout << v.toString();
-
-	v.popBack();
-	cout << v.toString();
-
-	cout << "v[0]: " << v[0] << "\n";
-
-	try
-	{
-		cout << "v[2]: " << v[2] << "\n";
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	cout << "Resizing to 10\n";
-	v.resize(10);
-	cout << v.toString();
-
-	return 0;
-} // v destroyed here.
+	cout << h.toString();
+}
