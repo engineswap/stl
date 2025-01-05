@@ -1,14 +1,13 @@
 #include <iostream>
+#include <memory>
 // #include "./containers/vector/vector.hpp"
-#include "./containers/hashmap/hashmap.hpp"
+// #include "./containers/hashmap/hashmap.hpp"
+#include "./containers/string/string.hpp"
+
 using std::cout;
 
 int main(){
-	engineswap::unordered_map<std::string> h;
-
-	h.insert("C++", "Based");
-	h.insert("Python", "Goated");
-	h.insert("Php", "Its there");
-
-	cout << h.toString();
+	engineswap::string s("dog");
+	cout << s.c_str() << "\n";
+	
 }

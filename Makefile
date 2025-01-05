@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -std=c++17
 
 # Default target
-all: vector hashmap
+all: vector hashmap string
 
 # Vector build
 vector: main.cpp containers/vector/vector.cpp
@@ -17,6 +17,13 @@ hashmap: main.cpp containers/hashmap/hashmap.cpp
 
 hashmap_test: tests/test_hashmap.cpp containers/hashmap/hashmap.cpp
 	$(CC) $(CFLAGS) tests/test_hashmap.cpp containers/hashmap/hashmap.cpp -o hashmap_test.out
+
+# String build
+string: main.cpp containers/string/string.cpp
+	$(CC) $(CFLAGS) main.cpp containers/string/string.cpp -o string.out
+
+string_test: tests/test_string.cpp containers/string/string.cpp
+	$(CC) $(CFLAGS) tests/test_string.cpp containers/string/string.cpp -o string_test.out
 
 # Clean all outputs
 clean:

@@ -1,7 +1,5 @@
 # Re-writing c++ STL from scratch
 
-Learn cmake.
-
 ### std::vector
 
 - https://stackoverflow.com/questions/3167272/how-does-c-stdvector-work
@@ -12,3 +10,6 @@ Learn cmake.
 
 - Add unit tests.
 
+ ### std::string
+
+- A null terminal char array under the hood
