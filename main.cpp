@@ -3,19 +3,21 @@
 // #include "./containers/vector/vector.hpp"
 // #include "./containers/hashmap/hashmap.hpp"
 // #include "./containers/string/string.hpp"
-#include "./containers/linked_list/linked_list.hpp"
+// #include "./containers/linked_list/linked_list.hpp"
+#include "./containers/bst/bst.hpp"
 
 using std::cout;
 
 int main(){
-	engineswap::linked_list<int> nums;
-	nums.push_back(1);
-	cout << nums.getSize() << "\n";
-	nums.push_back(2);
-	cout << nums.getSize() << "\n";
-	nums.push_back(3);
-	cout << nums.getSize() << "\n";
+	engineswap::bst tree;
+	tree.insert(10);
+	tree.insert(12);
+	tree.insert(11);
+	tree.insert(13);
+	tree.insert(14);
 
-	nums.erase(0);
-	nums.print();
+	tree.preorder();
+
+	tree.remove(13);
+	tree.preorder();
 }

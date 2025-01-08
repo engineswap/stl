@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -std=c++17
 
 # Default target
-all: vector hashmap string linked_list
+all: vector hashmap string linked_list bst
 
 # Vector build
 vector: main.cpp containers/vector/vector.cpp
@@ -31,6 +31,13 @@ linked_list: main.cpp containers/linked_list/linked_list.cpp
 
 linked_list_test: tests/test_linked_list.cpp containers/linked_list/linked_list.cpp
 	$(CC) $(CFLAGS) tests/test_linked_list.cpp containers/linked_list/linked_list.cpp -o linked_list_test.out
+
+# BST build
+bst: main.cpp containers/bst/bst.cpp
+	$(CC) $(CFLAGS) main.cpp containers/bst/bst.cpp -o bst.out
+
+bst_test: tests/test_bst.cpp containers/bst/bst.cpp
+	$(CC) $(CFLAGS) tests/test_bst.cpp containers/bst/bst.cpp -o bst_test.out
 
 # Clean all outputs
 clean:
