@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libhashmap_lib.a CMakeFiles/hashmap_lib.dir/hashmap.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libhashmap_lib.a
