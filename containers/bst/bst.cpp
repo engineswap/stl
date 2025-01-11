@@ -5,14 +5,14 @@ namespace engineswap{
 		head = nullptr;
 	}
 
-	void bst::insert(node* root, int key){
+	void bst::insert(BSTNode* root, int key){
 		if (head==nullptr){
-			head = new node(key);
+			head = new BSTNode(key);
 		}else{
 			if (root->val < key){
 				if(root->right==nullptr){
 					// insert right and were done
-					root->right = new node(key);
+					root->right = new BSTNode(key);
 				}else{
 					//go right recursively
 					insert(root->right, key);
@@ -20,7 +20,7 @@ namespace engineswap{
 			}else if(root->val > key){
 				if(root->left==nullptr){
 					// insert left and were done
-					root->left = new node(key);
+					root->left = new BSTNode(key);
 				}else{
 					//go left recursively
 					insert(root->left, key);
@@ -31,7 +31,7 @@ namespace engineswap{
 		}
 	}
 
-	bool bst::search(node* root, int key){
+	bool bst::search(BSTNode* root, int key){
 		if (root==nullptr){
 			return false;
 		}else if(root->val < key){
@@ -43,7 +43,7 @@ namespace engineswap{
 		}
 	}
 
-	node* bst::findMin(node* root){
+	BSTNode* bst::findMin(BSTNode* root){
 		if (root==nullptr){
 			throw std::runtime_error("Empty tree has no minimum.");
 		}
@@ -55,7 +55,7 @@ namespace engineswap{
 	}
 
 	// edgecase when parent==nullptr and root->val == key
-	void bst::remove(node* root, node* parent, int key){
+	void bst::remove(BSTNode* root, BSTNode* parent, int key){
 		if(root == nullptr){
 			throw std::runtime_error("Key doesn't exist in tree.");
 		}
@@ -87,14 +87,14 @@ namespace engineswap{
 					}
 				}
 			}else if(children==1){
-				node* child = (root->left) ? root->left : root->right;
+				BSTNode* child = (root->left) ? root->left : root->right;
 				if(parent==nullptr){
 					delete head;
 					head = child;
 				}else{
 					// Make parent point to the existing child
 					// Delete root
-					node* child = (root->left) ? root->left : root->right;
+					BSTNode* child = (root->left) ? root->left : root->right;
 					if (parent->left && parent->left == root){
 						parent->left = child;
 					}else{
@@ -106,7 +106,7 @@ namespace engineswap{
 			}else{
 					// 2 children
 					// Find min elem in right subtree (minRight)
-					node* minRight = findMin(root->right);
+					BSTNode* minRight = findMin(root->right);
 					
 					// Set root.val = minRight.val
 					root->val = minRight->val;
@@ -117,7 +117,7 @@ namespace engineswap{
 		}
 	}
 
-	int bst::height(node* root, int curHeight){
+	int bst::height(BSTNode* root, int curHeight){
 		if (root==nullptr){
 			return curHeight-1;
 		}
@@ -127,7 +127,7 @@ namespace engineswap{
 		return std::max(leftHeight, rightHeight);
 	}
 
-	void bst::preorder(node* root, std::vector<int>& traversal){
+	void bst::preorder(BSTNode* root, std::vector<int>& traversal){
 		if (root==nullptr) return;
 
 		traversal.push_back(root->val);

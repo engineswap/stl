@@ -1,9 +1,8 @@
 #include <iostream>
-#include <memory>
-// #include "./containers/vector/vector.hpp"
-// #include "./containers/hashmap/hashmap.hpp"
-// #include "./containers/string/string.hpp"
-// #include "./containers/linked_list/linked_list.hpp"
+#include "./containers/vector/vector.hpp"
+#include "./containers/hashmap/hashmap.hpp"
+#include "./containers/string/string.hpp"
+#include "./containers/linked_list/linked_list.hpp"
 #include "./containers/bst/bst.hpp"
 
 using std::cout;

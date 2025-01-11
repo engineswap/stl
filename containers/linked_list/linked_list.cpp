@@ -19,20 +19,20 @@ namespace engineswap{
 			push_back(val);
 			return;
 		}
-		node<T>* new_head = new node<T>(val, head);
+		LinkedListNode<T>* new_head = new LinkedListNode<T>(val, head);
 		head = new_head;
 		size++;
 	}
 	
 	template<typename T>
 	void linked_list<T>::push_back(T val){
-		node<T>* new_node = new node<T>(val);
+		LinkedListNode<T>* new_node = new LinkedListNode<T>(val);
 		
 		if(head==nullptr){
 			head = new_node;
 		}else{
 			// iterate to the end
-			node<T>* cur = head;
+			LinkedListNode<T>* cur = head;
 			while(cur->next){
 				cur = cur->next;
 			}
@@ -56,14 +56,14 @@ namespace engineswap{
 			return;
 		}
 		int i = 0;
-		node<T>* cur = head;
+		LinkedListNode<T>* cur = head;
 		while(i!=(index-1)){
 			cur = cur->next;
 			i++;
 		}
 		// cur is at the node before index
-		node<T>* node_to_insert = new node(val);
-		node<T>* next = cur->next;
+		LinkedListNode<T>* node_to_insert = new LinkedListNode(val);
+		LinkedListNode<T>* next = cur->next;
 		cur->next = node_to_insert;
 		node_to_insert->next = next;
 		size++;
@@ -75,7 +75,7 @@ namespace engineswap{
 			throw std::runtime_error("Popping not allowed on empty list.");
 		}
 		T head_value = head->val;
-		node<T>* next = head->next;
+		LinkedListNode<T>* next = head->next;
 		delete head;
 		head = next;
 		size--;
@@ -96,8 +96,8 @@ namespace engineswap{
 		}
 		
 		// Iterate while cur.next
-		node<T>* cur = head;
-		node<T>* prev = nullptr;
+		LinkedListNode<T>* cur = head;
+		LinkedListNode<T>* prev = nullptr;
 		while(cur->next){
 			prev = cur;
 			cur = cur->next;
@@ -122,15 +122,15 @@ namespace engineswap{
 		}
 
 		// Track prev, cur. Iterate to index, delete it, set prev.next = cur.next
-		node<T>* cur = head;
-		node<T>* prev = nullptr;
+		LinkedListNode<T>* cur = head;
+		LinkedListNode<T>* prev = nullptr;
 		int i = 0;
 		while(i!=index){
 			prev = cur;
 			cur = cur->next;
 			i++;
 		}
-		node<T>* next = cur->next;
+		LinkedListNode<T>* next = cur->next;
 		delete cur;
 		prev->next = next;
 		size--;
@@ -144,7 +144,7 @@ namespace engineswap{
 
 	template<typename T>
 	T linked_list<T>::back(){
-		node<T>* cur = head;
+		LinkedListNode<T>* cur = head;
 		while (cur->next){
 			cur = cur->next;
 		}
@@ -158,7 +158,7 @@ namespace engineswap{
 		}
 
 		int i = 0;
-		node<T>* cur = head;
+		LinkedListNode<T>* cur = head;
 		while (i!=index){
 			cur = cur->next;
 			i++;
@@ -179,9 +179,9 @@ namespace engineswap{
 	template<typename T>
 	void linked_list<T>::clear(){
 		// delete all the nodes in our linked list iteratively
-		node<T>* cur = head;
+		LinkedListNode<T>* cur = head;
 		while(cur!=nullptr){
-			node<T>* next = cur->next;
+			LinkedListNode<T>* next = cur->next;
 			delete cur;
 			cur = next;
 		}
@@ -195,7 +195,7 @@ namespace engineswap{
 			cout << "()\n";
 		}else{
 			cout << "(";
-			node<T>* cur = head;
+			LinkedListNode<T>* cur = head;
 			while(cur!=nullptr){
 				cout << cur->val;
 				cur = cur->next;

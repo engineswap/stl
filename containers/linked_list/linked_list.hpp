@@ -1,18 +1,16 @@
 #pragma once
 #include <cstddef>
-#include <string>
-#include <stdexcept>
 #include <iostream>
 using std::cout;
 
 namespace engineswap{
 
 	template<typename T>
-	struct node{
+	struct LinkedListNode{
 		T val;
-		node* next;
+		LinkedListNode* next;
 		
-		node(T value, node* next_node = nullptr){
+		LinkedListNode(T value, LinkedListNode* next_node = nullptr){
 			val = value;
 			next = next_node;
 		}
@@ -22,7 +20,7 @@ namespace engineswap{
 	class linked_list{
 
 	private:
-		node<T>* head;
+		LinkedListNode<T>* head;
 		size_t size;
 	public:
 	

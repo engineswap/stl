@@ -1,17 +1,16 @@
 #pragma once
 
-#include <stdexcept>
 #include <iostream>
 #include <vector>
 using std::cout;
 
 namespace engineswap{
-	struct node{
+	struct BSTNode{
 		int val;
-		node* left; 
-		node* right;
+		BSTNode* left; 
+		BSTNode* right;
 
-		node(int val, node* left = nullptr, node* right = nullptr){
+		BSTNode(int val, BSTNode* left = nullptr, BSTNode* right = nullptr){
 			this->val = val;
 			this->left = left;
 			this->right = right;
@@ -20,16 +19,16 @@ namespace engineswap{
 
 	class bst{
 	private:
-		node* head;
+		BSTNode* head;
 		
 		// Helper functions
-		void insert(node* root, int key);
-		bool search(node* root, int key);
-		node* findMin(node* root);
-		int height(node* root, int curHeight);
-		void remove(node* root, node* parent, int key);
+		void insert(BSTNode* root, int key);
+		bool search(BSTNode* root, int key);
+		BSTNode* findMin(BSTNode* root);
+		int height(BSTNode* root, int curHeight);
+		void remove(BSTNode* root, BSTNode* parent, int key);
 
-		void preorder(node* root, std::vector<int>& traversal);
+		void preorder(BSTNode* root, std::vector<int>& traversal);
 
 	public:
 		bst();
