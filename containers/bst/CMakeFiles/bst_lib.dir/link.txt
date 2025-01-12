@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libbst_lib.a CMakeFiles/bst_lib.dir/bst.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libbst_lib.a
