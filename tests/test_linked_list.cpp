@@ -1,108 +1,122 @@
+#include <gtest/gtest.h>
 #include "../containers/linked_list/linked_list.hpp"
-#include <cassert>
-#include <stdexcept>
-#include <iostream>
 
-int main() {
-    using namespace engineswap;
+// Test cases for engineswap::linked_list
+TEST(LinkedListTest, DefaultConstructor) {
+    engineswap::linked_list<int> nums;
+    EXPECT_EQ(nums.getSize(), 0);
+    EXPECT_TRUE(nums.is_empty());
+}
 
-    std::cout << "Test 1: Default Constructor" << std::endl;
-    linked_list<int> nums;
-    assert(nums.getSize() == 0);
-    assert(nums.is_empty());
-
-    std::cout << "Test 2: push_back and getSize" << std::endl;
+TEST(LinkedListTest, PushBackAndGetSize) {
+    engineswap::linked_list<int> nums;
     nums.push_back(10);
-    assert(nums.getSize() == 1);
-    assert(!nums.is_empty());
+    EXPECT_EQ(nums.getSize(), 1);
+    EXPECT_FALSE(nums.is_empty());
     nums.push_back(20);
     nums.push_back(30);
-    assert(nums.getSize() == 3);
+    EXPECT_EQ(nums.getSize(), 3);
+}
 
-    std::cout << "Test 3: push_front" << std::endl;
+TEST(LinkedListTest, PushFront) {
+    engineswap::linked_list<int> nums;
     nums.push_front(5);
-    assert(nums.getSize() == 4);
-    assert(nums.front() == 5);
+    EXPECT_EQ(nums.getSize(), 1);
+    EXPECT_EQ(nums.front(), 5);
+}
 
-    std::cout << "Test 4: front and back" << std::endl;
-    assert(nums.front() == 5);
-    assert(nums.back() == 30);
+TEST(LinkedListTest, FrontAndBack) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
+    nums.push_back(30);
+    EXPECT_EQ(nums.front(), 10);
+    EXPECT_EQ(nums.back(), 30);
+}
 
-    std::cout << "Test 5: pop_front" << std::endl;
-    assert(nums.pop_front() == 5);
-    assert(nums.getSize() == 3);
-    assert(nums.front() == 10);
+TEST(LinkedListTest, PopFront) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
+    nums.push_back(30);
+    EXPECT_EQ(nums.pop_front(), 10);
+    EXPECT_EQ(nums.getSize(), 2);
+    EXPECT_EQ(nums.front(), 20);
+}
 
-    std::cout << "Test 6: pop_back" << std::endl;
-    assert(nums.pop_back() == 30);
-    assert(nums.getSize() == 2);
-    assert(nums.back() == 20);
+TEST(LinkedListTest, PopBack) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
+    nums.push_back(30);
+    EXPECT_EQ(nums.pop_back(), 30);
+    EXPECT_EQ(nums.getSize(), 2);
+    EXPECT_EQ(nums.back(), 20);
+}
 
-    std::cout << "Test 7: insert" << std::endl;
+TEST(LinkedListTest, Insert) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
     nums.insert(1, 15); // Insert 15 at index 1
-    assert(nums.getSize() == 3);
-    assert(nums[0] == 10);
-    assert(nums[1] == 15);
-    assert(nums[2] == 20);
+    EXPECT_EQ(nums.getSize(), 3);
+    EXPECT_EQ(nums[0], 10);
+    EXPECT_EQ(nums[1], 15);
+    EXPECT_EQ(nums[2], 20);
+}
 
-    std::cout << "Test 8: erase" << std::endl;
+TEST(LinkedListTest, Erase) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(15);
+    nums.push_back(20);
     nums.erase(1); // Remove element at index 1
-    assert(nums.getSize() == 2);
-    assert(nums[0] == 10);
-    assert(nums[1] == 20);
+    EXPECT_EQ(nums.getSize(), 2);
+    EXPECT_EQ(nums[0], 10);
+    EXPECT_EQ(nums[1], 20);
+}
 
-    std::cout << "Test 9: operator[]" << std::endl;
+TEST(LinkedListTest, OperatorSquareBrackets) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
     nums[1] = 25; // Modify element at index 1
-    assert(nums[1] == 25);
+    EXPECT_EQ(nums[1], 25);
+}
 
-    std::cout << "Test 10: clear" << std::endl;
+TEST(LinkedListTest, Clear) {
+    engineswap::linked_list<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
     nums.clear();
-    assert(nums.getSize() == 0);
-    assert(nums.is_empty());
+    EXPECT_EQ(nums.getSize(), 0);
+    EXPECT_TRUE(nums.is_empty());
+}
 
-    std::cout << "Test 11: Error Handling" << std::endl;
-    try {
-        nums.pop_front();
-        assert(false); // Should not reach here
-    } catch (const std::runtime_error &e) {
-        assert(std::string(e.what()) == "Popping not allowed on empty list.");
-    }
+TEST(LinkedListTest, ErrorHandling) {
+    engineswap::linked_list<int> nums;
 
-    try {
-        nums.pop_back();
-        assert(false); // Should not reach here
-    } catch (const std::runtime_error &e) {
-        assert(std::string(e.what()) == "Popping not allowed on empty list.");
-    }
+    // pop_front on empty list
+    EXPECT_THROW(nums.pop_front(), std::runtime_error);
+    
+    // pop_back on empty list
+    EXPECT_THROW(nums.pop_back(), std::runtime_error);
 
-    try {
-        nums.erase(0);
-        assert(false); // Should not reach here
-    } catch (const std::runtime_error &e) {
-        assert(std::string(e.what()) == "Out of bounds");
-    }
+    // erase out of bounds
+    EXPECT_THROW(nums.erase(0), std::runtime_error);
 
-    try {
-        nums.insert(1, 50);
-        assert(false); // Should not reach here
-    } catch (const std::runtime_error &e) {
-        assert(std::string(e.what()) == "Out of bounds");
-    }
+    // insert out of bounds
+    EXPECT_THROW(nums.insert(1, 50), std::runtime_error);
 
-    try {
-        nums[0];
-        assert(false); // Should not reach here
-    } catch (const std::runtime_error &e) {
-        assert(std::string(e.what()) == "Out of bounds");
-    }
+    // operator[] out of bounds
+    EXPECT_THROW(nums[0], std::runtime_error);
+}
 
-    std::cout << "Test 12: Reuse after clear" << std::endl;
+TEST(LinkedListTest, ReuseAfterClear) {
+    engineswap::linked_list<int> nums;
     nums.push_back(100);
     nums.push_front(50);
-    assert(nums.getSize() == 2);
-    assert(nums.front() == 50);
-    assert(nums.back() == 100);
-
-    std::cout << "All tests passed!" << std::endl;
-    return 0;
+    EXPECT_EQ(nums.getSize(), 2);
+    EXPECT_EQ(nums.front(), 50);
+    EXPECT_EQ(nums.back(), 100);
 }

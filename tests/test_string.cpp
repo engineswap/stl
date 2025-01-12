@@ -1,42 +1,55 @@
+#include <gtest/gtest.h>
 #include "../containers/string/string.hpp"
-#include <cassert>
-#include <stdexcept>
-#include <cstring>
-#include <iostream>
 
-using std::cout;
+// Test default constructor
+TEST(StringTest, DefaultConstructor) {
+    engineswap::string sd;
+    EXPECT_EQ(sd.getCapacity(), 0);
+    EXPECT_EQ(sd.getSize(), 0);
+}
 
-int main(){
-	engineswap::string sd;
-	assert(sd.getCapacity()==0);
-	assert(sd.getSize()==0);
+// Test constructor with C-string
+TEST(StringTest, CStringConstructor) {
+    engineswap::string s("Dog");
+    EXPECT_EQ(s.getCapacity(), 3);
+    EXPECT_EQ(s.getSize(), 3);
+    EXPECT_STREQ(s.c_str(), "Dog");
+}
 
-	engineswap::string s("Dog");
-	assert(s.getCapacity()==3);
-	assert(s.getSize()==3);
-	assert(std::strcmp(s.c_str(),"Dog")==0);
+// Test operator[]
+TEST(StringTest, IndexOperator) {
+    engineswap::string s("Dog");
 
-	assert(s[0]=='D');
-	assert(s[1]=='o');
-	assert(s[2]=='g');
-	try{
-		s[3];
-		assert(false);
-	}
-	catch(const std::exception& e){}
-	
-	s += " balls";
-	assert(std::strcmp(s.c_str(),"Dog balls")==0);
-	assert(s.getSize()==9);
-	assert(s.getCapacity()==18);
+    EXPECT_EQ(s[0], 'D');
+    EXPECT_EQ(s[1], 'o');
+    EXPECT_EQ(s[2], 'g');
 
-	s += " lol";
-	assert(std::strcmp(s.c_str(),"Dog balls lol")==0);
-	assert(s.getSize()==13);
-	assert(s.getCapacity()==18);
+    // Test out-of-bounds access
+    EXPECT_THROW(s[3], std::exception);
+}
 
-	s.reserve(10);
-	assert(s.getCapacity()==18);
-	s.reserve(20);
-	assert(s.getCapacity()==20);
+// Test string concatenation (operator+=)
+TEST(StringTest, Concatenation) {
+    engineswap::string s("Dog");
+
+    s += " balls";
+    EXPECT_STREQ(s.c_str(), "Dog balls");
+    EXPECT_EQ(s.getSize(), 9);
+    EXPECT_EQ(s.getCapacity(), 18);
+
+    s += " lol";
+    EXPECT_STREQ(s.c_str(), "Dog balls lol");
+    EXPECT_EQ(s.getSize(), 13);
+    EXPECT_EQ(s.getCapacity(), 18);
+}
+
+// Test reserve functionality
+TEST(StringTest, Reserve) {
+    engineswap::string s("Dog balls lol");
+
+    s.reserve(10); // Should not shrink the capacity
+    EXPECT_EQ(s.getCapacity(), 13);
+
+    s.reserve(20); // Should increase the capacity
+    EXPECT_EQ(s.getCapacity(), 20);
 }
